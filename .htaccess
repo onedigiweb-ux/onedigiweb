@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# 1. Redirect /about.html to /about (to keep SEO clean)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*\.html\ HTTP/
+RewriteRule ^(.*)\.html$ /$1 [R=301,L]
+
+# 2. Map the clean URL back to the .html file behind the scenes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
